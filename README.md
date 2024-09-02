@@ -86,7 +86,7 @@ app.listen(PORT, () => {
 
 11. **Now our server and db should be set up. Start server by going back to the root of the project.**
     ```bash
-    cd ..
+    cd ../..
     npm run start
     ```
 12. **We can update our package.json file to restart server on update by adding the following to scripts.**
