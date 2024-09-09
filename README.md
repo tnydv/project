@@ -9,9 +9,9 @@
    ```
 3. **Go into this folder:**
 
-```bash
-cd my_project_name
-```
+  ```bash
+  cd my_project_name
+  ```
 
 4. **Initialize a new Node.js project:**
 
@@ -33,29 +33,29 @@ cd my_project_name
 
 7. **Copy this into server.js**
 
-```javascript
-const express = require("express");
-const cors = require("cors");
+  ```javascript
+  const express = require("express");
+  const cors = require("cors");
 
-const app = express();
-const PORT = process.env.PORT || 8000;
+  const app = express();
+  const PORT = process.env.PORT || 8000;
 
-// configs
-require("./server/config/mongoose.config");
+  // configs
+  require("./server/config/mongoose.config");
 
-// middleware
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+  // middleware
+  app.use(cors());
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
 
-// routes
-require("./server/routes/person.routes")(app);
+  // routes
+  require("./server/routes/api.routes")(app);
 
-// server instance
-app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`);
-});
-```
+  // server instance
+  app.listen(PORT, () => {
+    console.log(`Listening on port ${PORT}`);
+  });
+  ```
 
 8. **Now we will create out folder structure:**
    ```bash
@@ -73,11 +73,7 @@ app.listen(PORT, () => {
     const mongoose = require("mongoose");
 
     mongoose
-      .connect("mongodb://localhost/{db_name}", {
-        // replace db_name with your database name
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      })
+      .connect("mongodb://localhost/{db_name}") // replace db_name with your database name)
       .then(() => console.log("Established a connection to the database"))
       .catch((err) =>
         console.log("Something went wrong when connecting to the database", err)
@@ -93,3 +89,29 @@ app.listen(PORT, () => {
     ```json
     "start": "node --watch server.js"
     ```
+13. **Lets create our first API message**
+    ```bash
+    cd server
+    touch controllers/api.controller.js
+    touch routes/api.routes.js
+    ```
+14. **Add this to api.controllers.js file:**
+    ```javascript
+    module.exports.index = (request, response) => {
+      response.json({
+        message: "Hello, World!",
+      });
+    };
+    ```
+15. **Add this to api.routes.js file:**
+    ```javascript
+    const ApiController = require("../controllers/api.controller");
+    module.exports = function (app) {
+    app.get('/api', ApiController.index);
+    };
+    ```
+
+16. **Now let's start our server and we should have a working api call on localhost:8000/api:**
+  ```bash
+  npm run start
+  ```
