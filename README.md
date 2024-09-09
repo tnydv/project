@@ -9,9 +9,9 @@
    ```
 3. **Go into this folder:**
 
-  ```bash
-  cd my_project_name
-  ```
+    ```bash
+    cd my_project_name
+    ```
 
 4. **Initialize a new Node.js project:**
 
@@ -33,29 +33,29 @@
 
 7. **Copy this into server.js**
 
-  ```javascript
-  const express = require("express");
-  const cors = require("cors");
+    ```javascript
+    const express = require("express");
+    const cors = require("cors");
 
-  const app = express();
-  const PORT = process.env.PORT || 8000;
+    const app = express();
+    const PORT = process.env.PORT || 8000;
 
-  // configs
-  require("./server/config/mongoose.config");
+    // configs
+    require("./server/config/mongoose.config");
 
-  // middleware
-  app.use(cors());
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: true }));
+    // middleware
+    app.use(cors());
+    app.use(express.json());
+    app.use(express.urlencoded({ extended: true }));
 
-  // routes
-  require("./server/routes/api.routes")(app);
+    // routes
+    require("./server/routes/api.routes")(app);
 
-  // server instance
-  app.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`);
-  });
-  ```
+    // server instance
+    app.listen(PORT, () => {
+      console.log(`Listening on port ${PORT}`);
+    });
+    ```
 
 8. **Now we will create out folder structure:**
    ```bash
@@ -106,6 +106,7 @@
 15. **Add this to api.routes.js file:**
     ```javascript
     const ApiController = require("../controllers/api.controller");
+    
     module.exports = function (app) {
     app.get('/api', ApiController.index);
     };
